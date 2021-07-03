@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+ <head>
+
+   <title> License Plate Detection System </title>
+   <script>
+
+   function searchfunction()
+   {
+      document.forms['form1'].action = 'check/';
+      document.forms['form1'].method = 'GET';
+      document.forms['form1'].submit();
+   }
+   </script>
+   <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+     <body>
+       <center>
+
+       <h1>License Plate Detection System</h1>
+
+        <form name="form1" action="external/" method="POST">
+                      {% csrf_token %}
+
+                        <input type="text" name="inn" id="inn" value="{{data1}}">
+
+                      <input type="submit" value="Run Program">
+
+                        <button type="button"  onclick="searchfunction();">Search</button>
+
+
+          <br><br>
+          <h5>Instructions</h5>
+          <h6>The "Run Program" Button when clicked starts the Detection process</h6>
+          <h6>The "Search" Button when clicked fetches the Owner's results Considering the plate was scanned properly and the image taken was clear and visible</h6>
+        </center>
+      </form>
+
+      {% for s_id,s_reg,cla,fue,model,owner,refmfg,reglocation,validity in comb_lis %}
+ Registration No : <a href="/post_check/">{{s_reg}}</a>
+ Class :{{fue}}<br>
+Fuel :{{model}}<br>
+Model : {{owner}}<br>
+Owner : {{refmfg}}<br>
+ Reference Manufacturing : {{reglocation}}<br>
+ Registration Location :{{cla}}<br>
+ Validity : {{validity}}<br>
+
+
+
+ <br><br>
+
+
+{% endfor %}
+
+
+
+
+    </body>
+</html>
